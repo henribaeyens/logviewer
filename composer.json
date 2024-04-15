@@ -1,0 +1,14 @@
+{
+    "name": "henribaeyens/logviewer",
+    "description": "View logs from your back office",
+    "type": "prestashop-module",
+    "autoload": {
+        "psr-4": {
+            "PrestaShop\\Module\\Logviewer\\": "src/"
+        },
+        "classmap": ["logviewer.php"]
+    },
+    "config": {
+        "prepend-autoloader": false
+    }
+}

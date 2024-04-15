@@ -1,0 +1,7 @@
+services:
+
+  prestashop.module.logviewer.db.bulk_insert:
+    class: PrestaShop\Module\Logviewer\Infrastructure\Db\Operation\BulkInsert
+
+  prestashop.module.logviewer.db.delete_outdated_entries:
+    class: PrestaShop\Module\Logviewer\Infrastructure\Db\Operation\DeleteOutdatedEntries

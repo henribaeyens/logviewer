@@ -1,0 +1,24 @@
+services:
+
+  _defaults:
+    public: true
+
+  prestashop.module.logviewer.repository.log_entry_repository_interface:
+    class: PrestaShop\Module\Logviewer\Domain\Repository\LogEntryRepositoryInterface
+
+  prestashop.module.logviewer.repository.log_entry_repository:
+    class: PrestaShop\Module\Logviewer\Infrastructure\Db\Repository\LogEntryRepository
+    decorates: prestashop.module.logviewer.repository.log_entry_repository_interface
+    arguments:
+        - '@doctrine.dbal.default_connection'
+        - '%database_prefix%'
+        
+  prestashop.module.logviewer.repository.exception_entry_repository_interface:
+    class: PrestaShop\Module\Logviewer\Domain\Repository\ExceptionEntryRepositoryInterface
+
+  prestashop.module.logviewer.repository.exception_entry_repository:
+    class: PrestaShop\Module\Logviewer\Infrastructure\Db\Repository\ExceptionEntryRepository
+    decorates: prestashop.module.logviewer.repository.exception_entry_repository_interface
+    arguments:
+        - '@doctrine.dbal.default_connection'
+        - '%database_prefix%'

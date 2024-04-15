@@ -1,0 +1,18 @@
+services:
+
+  prestashop.module.logviewer.configuration_form.type:
+    public: true
+    class: PrestaShop\Module\Logviewer\Admin\Form\Type\ConfigurationFormType
+    parent: form.type.translatable.aware
+    tags:
+        - { name: form.type }
+
+  prestashop.module.logviewer.form.choice_provider.log_level_choice_provider:
+    class: PrestaShop\Module\Logviewer\Admin\Form\ChoiceProvider\LogLevelChoiceProvider
+    arguments:
+        - '@prestashop.module.logviewer.repository.log_entry_repository_interface'
+   
+  prestashop.module.logviewer.form.choice_provider.log_context_choice_provider:
+    class: PrestaShop\Module\Logviewer\Admin\Form\ChoiceProvider\LogContextChoiceProvider
+    arguments:
+        - '@prestashop.module.logviewer.repository.log_entry_repository_interface'

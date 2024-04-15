@@ -1,0 +1,45 @@
+#logviewer_configuration_form {
+    padding-bottom: 80px;
+
+    fieldset {
+        background-color: #fafbfc;
+        border-bottom-left-radius: 1rem;
+        border-bottom-right-radius: 1rem;
+    }
+
+    .input-group-append {
+        width: 50%;
+        margin-right: 0;
+    }
+
+    .form-group > {
+        .card-header {
+            background-color: white;
+            margin-bottom: 2rem;
+        }
+
+        .alert {
+            :not(.alert-unavailable) {
+                max-width: 47.65rem
+            }
+        }
+
+        .help-box {
+            margin-top: .6rem
+        }
+
+        .title {
+            margin-bottom: 1.25rem
+        }
+
+    }
+
+    .hide {
+        display: none
+    }
+
+}
+
+#configuration_form_Logviewer_History_Days {
+    max-width: 5rem;
+}

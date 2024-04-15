@@ -1,0 +1,19 @@
+{#**
+ * @author    Henri Baeyens <henri.baeyens@gmail.com>
+ * @copyright 2024
+ * @license   MIT License
+ *#}
+
+{% extends '@PrestaShop/Admin/layout.html.twig' %}
+{% trans_default_domain "Admin.Design.Feature" %}
+
+{% block content %}
+    {{ include('@PrestaShop/Admin/Common/Grid/grid_panel.html.twig', {'grid': grid }) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('themes/default/js/bundle/pagination.js') }}"></script>
+    <script src="{{ asset('../modules/logviewer/public/assets/admin/js/logviewer_grid.bundle.js') }}"></script>
+{% endblock %}
+

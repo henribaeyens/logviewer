@@ -1,0 +1,26 @@
+services:
+
+  _defaults:
+    public: true
+
+  PrestaShop\Module\Logviewer\Admin\Controller\LogviewerConfigurationController:
+    class: PrestaShop\Module\Logviewer\Admin\Controller\LogviewerConfigurationController
+    arguments:
+        - '@prestashop.module.logviewer.repository.log_entry_repository_interface'
+        - '@prestashop.module.logviewer.repository.exception_entry_repository_interface'
+        - '%kernel.environment%'
+
+  PrestaShop\Module\Logviewer\Admin\Controller\LogviewerLogController:
+    class: PrestaShop\Module\Logviewer\Admin\Controller\LogviewerLogController
+    arguments:
+        - '@prestashop.module.logviewer.grid.log_entry_factory'
+        - '@prestashop.module.logviewer.reader.log_reader_interface'
+        - '@prestashop.module.logviewer.repository.log_entry_repository_interface'
+        - '%kernel.environment%'
+
+  PrestaShop\Module\Logviewer\Admin\Controller\LogviewerExceptionController:
+    class: PrestaShop\Module\Logviewer\Admin\Controller\LogviewerExceptionController
+    arguments:
+        - '@prestashop.module.logviewer.grid.exception_entry_factory'
+        - '@prestashop.module.logviewer.reader.exception_reader_interface'
+        - '%kernel.environment%'

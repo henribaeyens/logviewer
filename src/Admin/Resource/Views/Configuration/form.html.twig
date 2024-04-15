@@ -1,0 +1,73 @@
+{#**
+ * @author    Henri Baeyens <henri.baeyens@gmail.com>
+ * @copyright 2024
+ * @license   GNU LESSER GENERAL PUBLIC License
+ *#}
+
+{% extends '@PrestaShop/Admin/layout.html.twig' %}
+
+{% import '@PrestaShop/Admin/macros.html.twig' as ps %}
+
+{% block content %}
+  {{ form_start(configurationForm, {'attr': {'id': 'logviewer_configuration_form'}}) }}
+  <div class="row justify-content-center">
+    <div class="col-xl-10">
+      <div class="card">
+        <h3 class="card-header">
+          <i class="material-icons">settings</i> {{ 'Configuration'|trans({}, 'Modules.Logviewer.Admin') }}
+        </h3>
+        <div class="card-body">
+          <div class="form-wrapper">
+            {{ form_errors(configurationForm) }}
+
+            <fieldset class="form-group">
+              <label class="form-control-label card-header">
+                {{ 'General settings'|trans({}, 'Modules.Logviewer.Admin') }}
+              </label>
+              <div class="form-group row type-text">
+                <label for="configuration_form_Logviewer_History_Days" class="form-control-label ">
+                  <span class="text-danger">*</span>
+                  {{ configurationForm.Logviewer_History_Days.vars.label  }}
+                </label>
+                <div class="col-sm">
+                  <div class="input-group">
+                    {{ form_widget(configurationForm.Logviewer_History_Days) }}
+                    <div class="input-group-append">
+                      <div class="input-group-text">{{ 'days'|trans({}, 'Modules.Logviewer.Admin') }}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+            <fieldset class="form-group">
+              <label class="form-control-label card-header">
+                {{ 'Logs preferences'|trans({}, 'Modules.Logviewer.Admin') }}
+              </label>
+              {{ ps.form_group_row(configurationForm.Logviewer_Log_Contexts, {}, {
+                'label': configurationForm.Logviewer_Log_Contexts.vars.label
+              }) }}
+              {{ ps.form_group_row(configurationForm.Logviewer_Log_Levels, {}, {
+                'label': configurationForm.Logviewer_Log_Levels.vars.label
+              }) }}
+              </fieldset>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="d-flex justify-content-end">
+            <button class="btn btn-primary" id="save-button">{{ 'Save'|trans({}, 'Admin.Actions') }}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{ form_end(configurationForm) }}
+{% endblock %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="{{ asset('../modules/logviewer/public/assets/admin/css/logviewer_conf.css') }}" type="text/css" media="all">
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script src="{{ asset('../modules/logviewer/public/assets/admin/js/logviewer_conf.bundle.js') }}"></script>
+{% endblock %}

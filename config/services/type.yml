@@ -1,0 +1,15 @@
+services:
+
+  prestashop.module.logviewer.form.type.log_level:
+    class: PrestaShop\Module\Logviewer\Admin\Form\Type\LogLevelChoiceType
+    arguments:
+        - '@=service("prestashop.module.logviewer.form.choice_provider.log_level_choice_provider").getChoices()'
+    tags:
+        - { name: form.type }
+
+  prestashop.module.logviewer.form.type.log_context:
+    class: PrestaShop\Module\Logviewer\Admin\Form\Type\LogContextChoiceType
+    arguments:
+        - '@=service("prestashop.module.logviewer.form.choice_provider.log_context_choice_provider").getChoices()'
+    tags:
+        - { name: form.type }

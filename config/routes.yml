@@ -1,0 +1,45 @@
+logviewer_configuration:
+  path: logviewer/configuration
+  methods: [GET, POST]
+  defaults:
+    _controller: PrestaShop\Module\Logviewer\Admin\Controller\LogviewerConfigurationController::indexAction
+    _legacy_controller: LogviewerConfigurationController
+    _legacy_link: LogviewerConfigurationController
+
+logviewer_logs:
+  path: logviewer/logs
+  methods: [GET]
+  defaults:
+    _controller: PrestaShop\Module\Logviewer\Admin\Controller\LogviewerLogController::indexAction
+    _legacy_controller: LogviewerLogController
+    _legacy_link: LogviewerLogController
+
+logviewer_logs_search:
+  path: logviewer/logs
+  methods: [POST]
+  defaults:
+    _controller: PrestaShop\Module\Logviewer\Admin\Controller\LogviewerLogController::searchAction
+    _legacy_controller: LogviewerLogController
+
+logviewer_logs_delete_all:
+  path: logviewer/logs/delete
+  methods: [POST]
+  defaults:
+    _controller: PrestaShop\Module\Logviewer\Admin\Controller\LogviewerLogController::deleteAction
+    _legacy_controller: LogviewerLogController
+
+logviewer_exceptions:
+  path: logviewer/exceptions
+  methods: [GET]
+  defaults:
+    _controller: PrestaShop\Module\Logviewer\Admin\Controller\LogviewerExceptionController::indexAction
+    _legacy_controller: LogviewerExceptionController
+    _legacy_link: LogviewerExceptionController
+
+logviewer_exceptions_search:
+  path: logviewer/exceptions
+  methods: [POST]
+  defaults:
+    _controller: PrestaShop\Module\Logviewer\Admin\Controller\LogviewerExceptionController::searchAction
+    _legacy_controller: LogviewerExceptionController
+

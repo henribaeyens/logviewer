@@ -1,0 +1,27 @@
+services:
+
+  prestashop.module.logviewer.reader.log_reader_interface:
+    public: true
+    class: PrestaShop\Module\Logviewer\Admin\Service\Reader\LogReaderInterface
+
+  prestashop.module.logviewer.reader.log_reader:
+    class: PrestaShop\Module\Logviewer\Infrastructure\Fs\Reader\LogReader
+    decorates: prestashop.module.logviewer.reader.log_reader_interface
+    arguments:
+        - '%logs_dir%'
+        - '@prestashop.module.logviewer.db.bulk_insert'
+        - '@prestashop.module.logviewer.db.delete_outdated_entries'
+        - '%kernel.environment%'
+
+  prestashop.module.logviewer.reader.exception_reader_interface:
+    public: true
+    class: PrestaShop\Module\Logviewer\Admin\Service\Reader\ExceptionReaderInterface
+
+  prestashop.module.logviewer.reader.exception_reader:
+    class: PrestaShop\Module\Logviewer\Infrastructure\Fs\Reader\ExceptionReader
+    decorates: prestashop.module.logviewer.reader.exception_reader_interface
+    arguments:
+        - '%logs_dir%'
+        - '@prestashop.module.logviewer.db.bulk_insert'
+        - '@prestashop.module.logviewer.db.delete_outdated_entries'
+        - '@prestashop.module.logviewer.repository.exception_entry_repository_interface'

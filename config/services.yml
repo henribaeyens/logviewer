@@ -1,0 +1,5 @@
+parameters:
+  logs_dir: "%kernel.root_dir%/../var/logs"
+
+imports:
+  - { resource: services/* }

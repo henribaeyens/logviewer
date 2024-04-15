@@ -1,0 +1,71 @@
+services:
+
+  # logs
+
+  prestashop.module.logviewer.grid.definition.log_entry:
+    public: true
+    class: PrestaShop\Module\Logviewer\Admin\Grid\Definition\LogEntryGridDefinitionFactory
+    parent: prestashop.core.grid.definition.factory.abstract_grid_definition
+
+  prestashop.module.logviewer.grid.query_builder.log_entry:
+    public: true
+    class: PrestaShop\Module\Logviewer\Admin\Grid\Query\LogEntryQueryBuilder
+    parent: prestashop.core.grid.abstract_query_builder
+    arguments:
+      - '@prestashop.core.query.doctrine_search_criteria_applicator'
+      
+  prestashop.module.logviewer.grid.log_entry_factory:
+    class: PrestaShop\PrestaShop\Core\Grid\GridFactory
+    arguments:
+        - '@prestashop.module.logviewer.grid.definition.log_entry'
+        - '@prestashop.module.logviewer.grid.data.log_entry.decorator'
+        - '@prestashop.core.grid.filter.form_factory'
+        - '@prestashop.core.hook.dispatcher'
+
+  prestashop.module.logviewer.grid.data.log_entry:
+    class: '%prestashop.core.grid.data.factory.doctrine_grid_data_factory%'
+    arguments:
+        - '@prestashop.module.logviewer.grid.query_builder.log_entry'
+        - '@prestashop.core.hook.dispatcher'
+        - '@prestashop.core.grid.query.doctrine_query_parser'
+        - 'logviewer_grid_log_entries'
+
+  prestashop.module.logviewer.grid.data.log_entry.decorator:
+    class: PrestaShop\Module\Logviewer\Admin\Grid\Data\LogEntryGridDataFactory
+    arguments:
+        - '@prestashop.module.logviewer.grid.data.log_entry'
+
+  # exceptions
+
+  prestashop.module.logviewer.grid.definition.exception_entry:
+    public: true
+    class: PrestaShop\Module\Logviewer\Admin\Grid\Definition\ExceptionEntryGridDefinitionFactory
+    parent: prestashop.core.grid.definition.factory.abstract_grid_definition
+
+  prestashop.module.logviewer.grid.query_builder.exception_entry:
+    public: true
+    class: PrestaShop\Module\Logviewer\Admin\Grid\Query\ExceptionEntryQueryBuilder
+    parent: prestashop.core.grid.abstract_query_builder
+    arguments:
+      - '@prestashop.core.query.doctrine_search_criteria_applicator'
+      
+  prestashop.module.logviewer.grid.exception_entry_factory:
+    class: PrestaShop\PrestaShop\Core\Grid\GridFactory
+    arguments:
+        - '@prestashop.module.logviewer.grid.definition.exception_entry'
+        - '@prestashop.module.logviewer.grid.data.exception_entry.decorator'
+        - '@prestashop.core.grid.filter.form_factory'
+        - '@prestashop.core.hook.dispatcher'
+
+  prestashop.module.logviewer.grid.data.exception_entry:
+    class: '%prestashop.core.grid.data.factory.doctrine_grid_data_factory%'
+    arguments:
+        - '@prestashop.module.logviewer.grid.query_builder.exception_entry'
+        - '@prestashop.core.hook.dispatcher'
+        - '@prestashop.core.grid.query.doctrine_query_parser'
+        - 'logviewer_grid_log_entries'
+
+  prestashop.module.logviewer.grid.data.exception_entry.decorator:
+    class: PrestaShop\Module\Logviewer\Admin\Grid\Data\ExceptionEntryGridDataFactory
+    arguments:
+        - '@prestashop.module.logviewer.grid.data.exception_entry'
