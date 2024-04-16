@@ -48,17 +48,21 @@ final class ExceptionEntryGridDefinitionFactory extends AbstractGridDefinitionFa
         $columns = (new ColumnCollection())
             ->add(
                 (new DateTimeColumn('date'))
-                ->setName($this->trans('Date', [], 'Modules.Logviewer.Admin'))
-                ->setOptions([
-                    'field' => 'date',
-                ])
+                    ->setName($this->trans('Date', [], 'Modules.Logviewer.Admin'))
+                    ->setOptions([
+                        'field' => 'date',
+                        'sortable' => false,
+                    ]
+                )
             )
             ->add(
                 (new HtmlColumn('content'))
                     ->setName($this->trans('Exception', [], 'Modules.Logviewer.Admin'))
                     ->setOptions([
                         'field' => 'content',
-                    ])
+                        'sortable' => false,
+                    ]
+                )
             )
             ->add(
                 (new ActionColumn('actions'))

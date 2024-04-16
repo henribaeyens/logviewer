@@ -8,9 +8,11 @@
 
 namespace PrestaShop\Module\Logviewer\Admin\Controller;
 
+use PrestaShop\Module\Logviewer\Admin\Grid\Definition\ExceptionEntryGridDefinitionFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use PrestaShop\PrestaShop\Core\Grid\GridFactory;
+use PrestaShopBundle\Service\Grid\ResponseBuilder;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use PrestaShopBundle\Security\Annotation\AdminSecurity;
 use PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController;
@@ -65,6 +67,28 @@ class LogviewerExceptionController extends FrameworkBundleAdminController
             'showContentHeader' => true,
             'grid' => $this->presentGrid($grid),
         ]);
+    }
+
+    /**
+     * @AdminSecurity(
+     *     "is_granted('read', request.get('_legacy_controller'))", message="Access denied.", redirectRoute="logviewer_logs"
+     * )
+     *
+     * @param Request $request
+     *
+     * @return RedirectResponse
+     */
+    public function searchAction(Request $request): RedirectResponse
+    {
+        /** @var ResponseBuilder $responseBuilder */
+        $responseBuilder = $this->get('prestashop.bundle.grid.response_builder');
+
+        return $responseBuilder->buildSearchResponse(
+            $this->get('prestashop.module.logviewer.grid.definition.exception_entry'),
+            $request,
+            ExceptionEntryGridDefinitionFactory::GRID_ID,
+            'logviewer_exceptions'
+        );
     }
 
     /**

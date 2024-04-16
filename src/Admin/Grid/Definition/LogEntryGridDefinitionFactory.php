@@ -52,31 +52,39 @@ final class LogEntryGridDefinitionFactory extends AbstractGridDefinitionFactory
         $columns = (new ColumnCollection())
             ->add(
                 (new DateTimeColumn('date'))
-                ->setName($this->trans('Date', [], 'Modules.Logviewer.Admin'))
-                ->setOptions([
-                    'field' => 'date',
-                ])
+                    ->setName($this->trans('Date', [], 'Modules.Logviewer.Admin'))
+                    ->setOptions([
+                        'field' => 'date',
+                        'sortable' => false,
+                    ]
+                )
             )
             ->add(
                 (new DataColumn('context'))
                     ->setName($this->trans('Context', [], 'Modules.Logviewer.Admin'))
                     ->setOptions([
                         'field' => 'context',
-                    ])
+                        'sortable' => false,
+                    ]
+                )
             )
             ->add(
                 (new LogLevelColumn('level'))
                     ->setName($this->trans('Level', [], 'Modules.Logviewer.Admin'))
                     ->setOptions([
                         'field' => 'level',
-                    ])
+                        'sortable' => false,
+                    ]
+                )
             )
             ->add(
                 (new DataColumn('content'))
                     ->setName($this->trans('Message', [], 'Modules.Logviewer.Admin'))
                     ->setOptions([
                         'field' => 'content',
-                    ])
+                        'sortable' => false,
+                    ]
+                )
             )
             ->add(
                 (new ActionColumn('actions'))
