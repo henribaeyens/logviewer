@@ -12,3 +12,6 @@ The lists are initially empty: click the settings icon on the upper-right corner
 The lists are not updated automatically (they could be but I've decided against it) but via the settings icon.
 Both lists can filtered and searched.
 
+# Requirements
+- PHP >= 8
+- Prestashop >= 8

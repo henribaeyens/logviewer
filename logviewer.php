@@ -78,12 +78,12 @@ class Logviewer extends Module
 
         $this->displayName = $this->l('Logviewer');
         $this->description = $this->l('View logs (errors and exceptions) from your back-office.');
-        $this->ps_version = (bool) version_compare(_PS_VERSION_, '1.7.8', '>=');
+        $this->ps_version = (bool) version_compare(_PS_VERSION_, '8', '>=');
 
        // $this->logo_path = $this->_path . 'logo.png';
         $this->module_path = $this->_path;
 
-        $this->ps_versions_compliancy = ['min' => '1.7.8', 'max' => _PS_VERSION_];
+        $this->ps_versions_compliancy = ['min' => '8', 'max' => _PS_VERSION_];
     }
 
     /**
