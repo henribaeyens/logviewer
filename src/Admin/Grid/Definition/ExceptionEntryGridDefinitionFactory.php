@@ -11,11 +11,9 @@ namespace PrestaShop\Module\Logviewer\Admin\Grid\Definition;
 use PrestaShop\PrestaShop\Core\Grid\Filter\Filter;
 use PrestaShopBundle\Form\Admin\Type\SearchAndResetType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use PrestaShop\PrestaShop\Core\Grid\Column\Type\DataColumn;
 use PrestaShop\PrestaShop\Core\Grid\Column\ColumnCollection;
 use PrestaShop\PrestaShop\Core\Grid\Filter\FilterCollection;
 use PrestaShop\PrestaShop\Core\Grid\Action\GridActionCollection;
-use PrestaShop\PrestaShop\Core\Grid\Action\Type\SimpleGridAction;
 use PrestaShop\PrestaShop\Core\Grid\Action\Type\SubmitGridAction;
 use PrestaShop\PrestaShop\Core\Grid\Column\Type\Common\HtmlColumn;
 use PrestaShop\PrestaShop\Core\Grid\Column\Type\Common\ActionColumn;
@@ -105,18 +103,13 @@ final class ExceptionEntryGridDefinitionFactory extends AbstractGridDefinitionFa
     {
         return (new GridActionCollection())
             ->add(
-                (new SubmitGridAction('delete_all_email_logs'))
-                    ->setName($this->trans('Erase all', [], 'Admin.Advparameters.Feature'))
-                    ->setIcon('delete')
-                    ->setOptions([
-                        'submit_route' => 'admin_logs_delete_all',
-                        'confirm_message' => $this->trans('Are you sure?', [], 'Admin.Notifications.Warning'),
-                    ])
-            )
-            ->add(
-                (new SimpleGridAction('common_refresh_list'))
-                    ->setName($this->trans('Refresh list', [], 'Admin.Advparameters.Feature'))
+                (new SubmitGridAction('refresh_exceptions'))
+                    ->setName($this->trans('Refresh exceptions', [], 'Modules.Logviewer.Action'))
                     ->setIcon('refresh')
+                    ->setOptions([
+                        'submit_route' => 'logviewer_exceptions_refresh',
+                    ]
+                )
             )
         ;
     }

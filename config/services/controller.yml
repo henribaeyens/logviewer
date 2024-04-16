@@ -15,7 +15,6 @@ services:
     arguments:
         - '@prestashop.module.logviewer.grid.log_entry_factory'
         - '@prestashop.module.logviewer.reader.log_reader_interface'
-        - '@prestashop.module.logviewer.repository.log_entry_repository_interface'
         - '%kernel.environment%'
 
   PrestaShop\Module\Logviewer\Admin\Controller\LogviewerExceptionController:

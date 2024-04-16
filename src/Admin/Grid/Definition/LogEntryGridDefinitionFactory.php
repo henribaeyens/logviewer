@@ -129,12 +129,11 @@ final class LogEntryGridDefinitionFactory extends AbstractGridDefinitionFactory
     {
         return (new GridActionCollection())
             ->add(
-                (new SubmitGridAction('delete_all_logs'))
+                (new SubmitGridAction('refresh_logs'))
                     ->setName($this->trans('Refresh logs', [], 'Modules.Logviewer.Action'))
                     ->setIcon('refresh')
                     ->setOptions([
-                        'submit_route' => 'logviewer_logs_delete_all',
-                        'confirm_message' => $this->trans('This operation will clear all logs', [], 'Modules.Logviewer.Warning'),
+                        'submit_route' => 'logviewer_logs_refresh',
                     ]
                 )
             )

@@ -8,8 +8,10 @@
 
 namespace PrestaShop\Module\Logviewer\Admin\Controller;
 
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use PrestaShop\PrestaShop\Core\Grid\GridFactory;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use PrestaShopBundle\Security\Annotation\AdminSecurity;
 use PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController;
 use PrestaShop\Module\Logviewer\Admin\Search\Filters\ExceptionEntryFilters;
@@ -53,11 +55,6 @@ class LogviewerExceptionController extends FrameworkBundleAdminController
      */
     public function indexAction(ExceptionEntryFilters $filters): Response
     {
-        // update entries only if we are not paginating
-        if (null === $filters->getOffset()) {
-            $this->exceptionReader->read();
-        }
-
         $grid = $this->exceptionEntryGridFactory->getGrid($filters);
 
         return $this->render('@Modules/logviewer/src/Admin/Resource/Views/Exceptions/list.html.twig', [
@@ -69,4 +66,21 @@ class LogviewerExceptionController extends FrameworkBundleAdminController
             'grid' => $this->presentGrid($grid),
         ]);
     }
+
+    /**
+     * @AdminSecurity(
+     *     "is_granted('read', request.get('_legacy_controller'))", message="Access denied.", redirectRoute="logviewer_logs"
+     * )
+     *
+     * @param Request $request
+     *
+     * @return RedirectResponse
+     */
+    public function refreshAction(Request $request): RedirectResponse
+    {
+        $this->exceptionReader->read();
+
+        return $this->redirectToRoute('logviewer_exceptions');
+    }
+
 }

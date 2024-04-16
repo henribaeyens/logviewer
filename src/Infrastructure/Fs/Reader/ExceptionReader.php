@@ -11,6 +11,7 @@ namespace PrestaShop\Module\Logviewer\Infrastructure\Fs\Reader;
 use DateTime;
 use Configuration;
 use SplFileObject;
+use Validate;
 use PrestaShop\Module\Logviewer\Domain\Entity\ExceptionEntry;
 use PrestaShop\Module\Logviewer\Infrastructure\Db\Operation\BulkInsert;
 use PrestaShop\Module\Logviewer\Admin\Service\Reader\ExceptionReaderInterface;
@@ -46,7 +47,7 @@ final class ExceptionReader extends AbstractReader implements ExceptionReaderInt
 
     public function read(): void
     {
-        if (0 === $this->getLastDateRead()) {
+        if (!Validate::isDateFormat($this->getLastDateRead())) {
             $this->initialize();
         } else {
             $this->updateEntries();

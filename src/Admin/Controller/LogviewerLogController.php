@@ -34,11 +34,6 @@ class LogviewerLogController extends FrameworkBundleAdminController
     private $logReader;
 
     /**
-     * @var LogEntryRepositoryInterface
-     */
-    private $logEntryRepository;
-
-    /**
      * @var string
      */
     private $currentEnvironment;
@@ -46,18 +41,15 @@ class LogviewerLogController extends FrameworkBundleAdminController
     /**
      * @param GridFactory $logEntryGridFactory
      * @param LogReaderInterface $logReader
-     * @param LogEntryRepositoryInterface $logEntryRepository
      * @param string $currentEnvironment
      */
     public function __construct(
         GridFactory $logEntryGridFactory,
         LogReaderInterface $logReader,
-        LogEntryRepositoryInterface $logEntryRepository,
         string $currentEnvironment
     ) {
         $this->logEntryGridFactory = $logEntryGridFactory;
         $this->logReader = $logReader;
-        $this->logEntryRepository = $logEntryRepository;
         $this->currentEnvironment = $currentEnvironment;
     }
     
@@ -72,13 +64,6 @@ class LogviewerLogController extends FrameworkBundleAdminController
      */
     public function indexAction(LogEntryFilters $filters): Response
     {
-        if (null === $filters->getOffset()) {
-            $outcome = $this->logReader->read();
-            if (true !== $outcome) {
-                $this->addFlash('error', $outcome);
-            }
-        }
-        
         $filters->addFilter([
             'env' => $this->currentEnvironment,
         ]);
@@ -126,10 +111,13 @@ class LogviewerLogController extends FrameworkBundleAdminController
      *
      * @return RedirectResponse
      */
-    public function deleteAction(Request $request): RedirectResponse
+    public function refreshAction(Request $request): RedirectResponse
     {
-        $this->logEntryRepository->deleteAll();
-        Configuration::updateValue('Logviewer_Last_Line_Read_' . ucfirst($this->currentEnvironment), 0);
+        $outcome = $this->logReader->read();
+        if (true !== $outcome) {
+            $this->addFlash('error', $outcome);
+        }
+        
 
         return $this->redirectToRoute('logviewer_logs');
     }

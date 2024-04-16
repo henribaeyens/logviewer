@@ -21,11 +21,11 @@ logviewer_logs_search:
     _controller: PrestaShop\Module\Logviewer\Admin\Controller\LogviewerLogController::searchAction
     _legacy_controller: LogviewerLogController
 
-logviewer_logs_delete_all:
-  path: logviewer/logs/delete
+logviewer_logs_refresh:
+  path: logviewer/logs/refresh
   methods: [POST]
   defaults:
-    _controller: PrestaShop\Module\Logviewer\Admin\Controller\LogviewerLogController::deleteAction
+    _controller: PrestaShop\Module\Logviewer\Admin\Controller\LogviewerLogController::refreshAction
     _legacy_controller: LogviewerLogController
 
 logviewer_exceptions:
@@ -43,3 +43,9 @@ logviewer_exceptions_search:
     _controller: PrestaShop\Module\Logviewer\Admin\Controller\LogviewerExceptionController::searchAction
     _legacy_controller: LogviewerExceptionController
 
+logviewer_exceptions_refresh:
+  path: logviewer/exceptions/refresh
+  methods: [POST]
+  defaults:
+    _controller: PrestaShop\Module\Logviewer\Admin\Controller\LogviewerExceptionController::refreshAction
+    _legacy_controller: LogviewerExceptionController

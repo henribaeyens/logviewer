@@ -20,8 +20,13 @@
 const $ = window.$;
 
 $(() => {
-    const grid = new window.prestashop.component.Grid('logviewer_grid_log_entries');
-    grid.addExtension(new window.prestashop.component.GridExtensions.SubmitGridActionExtension());
-    grid.addExtension(new window.prestashop.component.GridExtensions.FiltersSubmitButtonEnablerExtension());
-    grid.addExtension(new window.prestashop.component.GridExtensions.FiltersResetExtension());
+    const logsGrid = new window.prestashop.component.Grid('logviewer_grid_log_entries');
+    logsGrid.addExtension(new window.prestashop.component.GridExtensions.SubmitGridActionExtension());
+    logsGrid.addExtension(new window.prestashop.component.GridExtensions.FiltersSubmitButtonEnablerExtension());
+    logsGrid.addExtension(new window.prestashop.component.GridExtensions.FiltersResetExtension());
+
+    const exceptionsGrid = new window.prestashop.component.Grid('logviewer_grid_exception_entries');
+    exceptionsGrid.addExtension(new window.prestashop.component.GridExtensions.SubmitGridActionExtension());
+    exceptionsGrid.addExtension(new window.prestashop.component.GridExtensions.FiltersSubmitButtonEnablerExtension());
+    exceptionsGrid.addExtension(new window.prestashop.component.GridExtensions.FiltersResetExtension());
 });
