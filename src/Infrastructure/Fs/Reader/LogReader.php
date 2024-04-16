@@ -133,19 +133,12 @@ final class LogReader extends AbstractReader implements LogReaderInterface
         while (!$this->fileObject->eof()) {
             $line = $this->fileObject->fgets();
             foreach ($dates as $date) {
-                if ($this->startswith($line, "[" . $date, 11)) {
+                if (str_starts_with($line, "[" . $date)) {
                     return $this->fileObject->key();
                 }
             }
         }
         return 0;
-    }
-
-    private function startswith(string $haystack, string $needle, int $strlen): bool|int
-    {
-        return $haystack[0] === $needle[0]
-            ? strncmp($haystack, $needle, $strlen) === 0
-            : false;
     }
 
     private function setLastLineRead(int $line): void

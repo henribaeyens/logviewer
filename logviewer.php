@@ -68,7 +68,7 @@ class Logviewer extends Module
     {
         $this->name = 'logviewer';
         $this->tab = 'other';
-        $this->version = '1.0.0';
+        $this->version = '1.1.0';
         $this->author = 'Henri Baeyens';
         $this->need_instance = 0;
 
@@ -112,6 +112,11 @@ class Logviewer extends Module
      */
     public function uninstall(): bool
     {
+        Configuration::deleteByName('Logviewer_History_Days');
+        Configuration::deleteByName('Logviewer_Last_Line_Read_Dev');
+        Configuration::deleteByName('Logviewer_Last_Line_Read_Prod');
+        Configuration::deleteByName('Logviewer_Last_Date_Read');
+
         $finder = new ContainerFinder(Context::getContext());
         $sfContainer = $finder->getContainer();
         $tabRepository = $sfContainer->get('prestashop.core.admin.tab.repository');
