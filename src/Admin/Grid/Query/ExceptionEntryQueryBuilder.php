@@ -17,11 +17,6 @@ use PrestaShop\PrestaShop\Core\Grid\Query\DoctrineSearchCriteriaApplicator;
 final class ExceptionEntryQueryBuilder extends AbstractDoctrineQueryBuilder
 {
     /**
-     * @var DoctrineSearchCriteriaApplicator
-     */
-    private $searchCriteriaApplicator;
-
-    /**
      * @var string Table name
      */
     private $table;
@@ -33,12 +28,10 @@ final class ExceptionEntryQueryBuilder extends AbstractDoctrineQueryBuilder
      */
     public function __construct(
         Connection $connection,
-        $databasePrefix,
-        DoctrineSearchCriteriaApplicator $searchCriteriaApplicator
+        string $databasePrefix,
+        private DoctrineSearchCriteriaApplicator $searchCriteriaApplicator,
     ) {
         parent::__construct($connection, $databasePrefix);
-
-        $this->searchCriteriaApplicator = $searchCriteriaApplicator;
         $this->table = $databasePrefix . 'logviewer_exception';
     }
     

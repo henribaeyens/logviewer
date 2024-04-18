@@ -18,33 +18,15 @@ use PrestaShop\Module\Logviewer\Domain\Repository\ExceptionEntryRepositoryInterf
 class LogviewerConfigurationController extends FrameworkBundleAdminController
 {
     /**
-     * @var LogEntryRepositoryInterface
-     */
-    private $logEntryRepository;
-
-    /**
-     * @var ExceptionEntryRepositoryInterface
-     */
-    private $exceptionEntryRepository;
-
-    /**
-     * @var string
-     */
-    private $currentEnvironment;
-
-    /**
      * @param LogEntryRepositoryInterface $logEntryRepository
      * @param ExceptionEntryRepositoryInterface $exceptionEntryRepository
      * @param string $currentEnvironment
      */
     public function __construct(
-        LogEntryRepositoryInterface $logEntryRepository,
-        ExceptionEntryRepositoryInterface $exceptionEntryRepository,
-        string $currentEnvironment
+        private LogEntryRepositoryInterface $logEntryRepository,
+        private ExceptionEntryRepositoryInterface $exceptionEntryRepository,
+        private readonly string $currentEnvironment,
     ) {
-        $this->logEntryRepository = $logEntryRepository;
-        $this->exceptionEntryRepository = $exceptionEntryRepository;
-        $this->currentEnvironment = $currentEnvironment;
     }
 
     public function indexAction(Request $request)

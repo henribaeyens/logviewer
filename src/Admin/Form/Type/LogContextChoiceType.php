@@ -15,17 +15,11 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 class LogContextChoiceType extends AbstractType
 {
     /**
-     * @var array
-     */
-    private $logContexts;
-
-    /**
-     * @param array $logLevels
+     * @param array $logContexts
      */
     public function __construct(
-        array $logContexts
+        private readonly array $logContexts,
     ) {
-        $this->logContexts = $logContexts;
     }
 
     /**

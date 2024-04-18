@@ -10,15 +10,11 @@ namespace PrestaShop\Module\Logviewer\Infrastructure\Db\Repository;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Query\QueryBuilder;
+use PrestaShop\Module\Logviewer\Domain\Entity\ExceptionEntry;
 use PrestaShop\Module\Logviewer\Domain\Repository\ExceptionEntryRepositoryInterface;
 
-class ExceptionEntryRepository implements ExceptionEntryRepositoryInterface
+final class ExceptionEntryRepository implements ExceptionEntryRepositoryInterface
 {
-    /**
-     * @var Connection the Database connection
-     */
-    private $connection;
-
     /**
      * @var string Table name
      */
@@ -29,11 +25,10 @@ class ExceptionEntryRepository implements ExceptionEntryRepositoryInterface
      * @param string $databasePrefix
      */
     public function __construct(
-        Connection $connection,
-        $databasePrefix,
+        private Connection $connection,
+        string $databasePrefix,
     ) {
-        $this->connection = $connection;
-        $this->table = $databasePrefix . 'logviewer_exception';
+        $this->table = $databasePrefix . ExceptionEntry::TABLE;
     }
 
     public function countByDate(string $date): int

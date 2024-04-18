@@ -17,33 +17,15 @@ use PrestaShop\Module\Logviewer\Infrastructure\Db\Operation\DeleteOutdatedEntrie
 abstract class AbstractReader
 {
     /**
-     * @var string
-     */
-    protected $logsDir;
-
-    /**
-     * @var BulkInsert
-     */
-    protected $bulkInsert;
-
-    /**
-     * @var DeleteOutdatedEntries
-     */
-    protected $deleteOutdatedEntries;
-
-    /**
      * @param string $logsDir
      * @param BulkInsert $bulkInsert
      * @param DeleteOutdatedEntries $deleteOutdatedEntries
      */
     protected function __construct(
-        string $logsDir,
-        BulkInsert $bulkInsert,
-        DeleteOutdatedEntries $deleteOutdatedEntries,
+        protected readonly string $logsDir,
+        protected BulkInsert $bulkInsert,
+        protected DeleteOutdatedEntries $deleteOutdatedEntries,
     ) {
-        $this->logsDir = $logsDir;
-        $this->bulkInsert = $bulkInsert;
-        $this->deleteOutdatedEntries = $deleteOutdatedEntries;
     }
 
     protected function getDates(): array

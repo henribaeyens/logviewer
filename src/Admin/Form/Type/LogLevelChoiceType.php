@@ -16,17 +16,11 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 class LogLevelChoiceType extends AbstractType
 {
     /**
-     * @var array
-     */
-    private $logLevels;
-
-    /**
      * @param array $logLevels
      */
     public function __construct(
-        array $logLevels
+        private readonly array $logLevels,
     ) {
-        $this->logLevels = $logLevels;
     }
 
     /**

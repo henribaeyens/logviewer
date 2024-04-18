@@ -24,11 +24,6 @@ final class ExceptionReader extends AbstractReader implements ExceptionReaderInt
     private CONST EXCEPTION_PATTERN = '/^[[:blank:]]+v[\d.]+[[:blank:]]+(\d{4}\/\d{2}\/\d{2})[[:blank:]]-[[:blank:]](\d{2}:\d{2}:\d{2}):(.*)/sm';
 
     /**
-     * @var ExceptionEntryRepositoryInterface
-     */
-    private $exceptionEntryRepository;
-
-    /**
      * @param string $logsDir
      * @param BulkInsert $bulkInsert
      * @param DeleteOutdatedEntries $deleteOutdatedEntries
@@ -38,10 +33,9 @@ final class ExceptionReader extends AbstractReader implements ExceptionReaderInt
         string $logsDir,
         BulkInsert $bulkInsert,
         DeleteOutdatedEntries $deleteOutdatedEntries,
-        ExceptionEntryRepositoryInterface $exceptionEntryRepository
+        private ExceptionEntryRepositoryInterface $exceptionEntryRepository,
     ) {
         parent::__construct($logsDir, $bulkInsert, $deleteOutdatedEntries);
-        $this->exceptionEntryRepository = $exceptionEntryRepository;
         $this->bulkInsert->setDefinition(ExceptionEntry::class);
     }
 

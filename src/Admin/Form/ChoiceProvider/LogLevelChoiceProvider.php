@@ -8,23 +8,17 @@
 
 namespace PrestaShop\Module\Logviewer\Admin\Form\ChoiceProvider;
 
-use PrestaShop\Module\Logviewer\Domain\Entity\LogEntry;
+use PrestaShop\Module\Logviewer\Domain\Enum\LogLevel;
 use PrestaShop\Module\Logviewer\Domain\Repository\LogEntryRepositoryInterface;
 
 final class LogLevelChoiceProvider
 {
     /**
-     * @var LogEntryRepositoryInterface
-     */
-    protected $logEntryRepository;
-    
-    /**
      * @param LogEntryRepositoryInterface $logEntryRepository
      */
     public function __construct(
-        LogEntryRepositoryInterface $logEntryRepository
+        private LogEntryRepositoryInterface $logEntryRepository,
     ) {
-        $this->logEntryRepository = $logEntryRepository;
     }
 
     public function getChoices(): array
@@ -32,7 +26,7 @@ final class LogLevelChoiceProvider
         $levels = $this->logEntryRepository->findLogLevels();
 
         if (empty($levels)) {
-            return LogEntry::LEVELS;
+            return LogLevel::array();
         }
 
         $choices = [];

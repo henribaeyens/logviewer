@@ -22,21 +22,6 @@ if (file_exists($autoloadPath)) {
 
 class Logviewer extends Module
 {
-    /**
-     * @var bool
-     */
-    private $ps_version;
-
-    /**
-     * @var string
-     */
-    private $logo_path;
-
-    /**
-     * @var string
-     */
-    private $module_path;
-
     const MODULE_ADMIN_CONTROLLERS = [
         [
             'class_name' => 'LogviewerAdminParentController',
@@ -68,7 +53,7 @@ class Logviewer extends Module
     {
         $this->name = 'logviewer';
         $this->tab = 'other';
-        $this->version = '1.1.0';
+        $this->version = '1.2.0';
         $this->author = 'Henri Baeyens';
         $this->need_instance = 0;
 
@@ -78,11 +63,6 @@ class Logviewer extends Module
 
         $this->displayName = $this->l('Logviewer');
         $this->description = $this->l('View logs (errors and exceptions) from your back-office.');
-        $this->ps_version = (bool) version_compare(_PS_VERSION_, '8', '>=');
-
-       // $this->logo_path = $this->_path . 'logo.png';
-        $this->module_path = $this->_path;
-
         $this->ps_versions_compliancy = ['min' => '8', 'max' => _PS_VERSION_];
     }
 
@@ -116,6 +96,8 @@ class Logviewer extends Module
         Configuration::deleteByName('Logviewer_Last_Line_Read_Dev');
         Configuration::deleteByName('Logviewer_Last_Line_Read_Prod');
         Configuration::deleteByName('Logviewer_Last_Date_Read');
+        Configuration::deleteByName('Logviewer_Log_Contexts');
+        Configuration::deleteByName('Logviewer_Log_Levels');
 
         $finder = new ContainerFinder(Context::getContext());
         $sfContainer = $finder->getContainer();

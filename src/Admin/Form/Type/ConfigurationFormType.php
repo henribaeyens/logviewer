@@ -9,10 +9,12 @@
  namespace PrestaShop\Module\Logviewer\Admin\Form\Type;
 
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\Count;
 use Symfony\Component\Validator\Constraints\Range;
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use PrestaShop\Module\Logviewer\Domain\Entity\LogEntry;
+use PrestaShop\Module\Logviewer\Domain\Enum\LogContext;
+use PrestaShop\Module\Logviewer\Domain\Enum\LogLevel;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use PrestaShopBundle\Form\Admin\Type\TranslatorAwareType;
 use PrestaShopBundle\Form\Admin\Type\Material\MaterialChoiceTableType;
@@ -52,16 +54,26 @@ class ConfigurationFormType extends TranslatorAwareType
             ])
             ->add('Logviewer_Log_Contexts', MaterialChoiceTableType::class, [
                 'label' => $this->trans('Log contexts', 'Modules.Logviewer.Admin'),
-                'choices' => LogEntry::CONTEXTS,
+                'choices' => LogContext::array(),
                 'multiple' => true,
                 'expanded' => true,
+                'constraints' => [
+                    new Count([
+                        'min' => 1,
+                    ]),
+                ],
                 'required' => true,
             ])
             ->add('Logviewer_Log_Levels', MaterialChoiceTableType::class, [
                 'label' => $this->trans('Log levels', 'Modules.Logviewer.Admin'),
-                'choices' => LogEntry::LEVELS,
+                'choices' => LogLevel::array(),
                 'multiple' => true,
                 'expanded' => true,
+                'constraints' => [
+                    new Count([
+                        'min' => 1,
+                    ]),
+                ],
                 'required' => true,
             ])
         ;

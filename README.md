@@ -25,5 +25,5 @@ Both lists can filtered and searched.
   
 
 # Requirements
-- PHP >= 8
+- PHP >= 8.1
 - Prestashop >= 8

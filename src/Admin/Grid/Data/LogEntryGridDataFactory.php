@@ -13,20 +13,14 @@ use PrestaShop\PrestaShop\Core\Grid\Record\RecordCollection;
 use PrestaShop\PrestaShop\Core\Grid\Search\SearchCriteriaInterface;
 use PrestaShop\PrestaShop\Core\Grid\Data\Factory\GridDataFactoryInterface;
 
-class LogEntryGridDataFactory implements GridDataFactoryInterface
+final class LogEntryGridDataFactory implements GridDataFactoryInterface
 {
-    /**
-     * @var GridDataFactoryInterface
-     */
-    protected $logEntryDataFactory;
-
     /**
      * @param GridDataFactoryInterface $logEntryDataFactory
      */
     public function __construct(
-        GridDataFactoryInterface $logEntryDataFactory
+        private GridDataFactoryInterface $logEntryDataFactory,
     ) {
-        $this->logEntryDataFactory = $logEntryDataFactory;
     }
 
     /**

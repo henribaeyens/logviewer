@@ -21,29 +21,11 @@ use PrestaShop\Module\Logviewer\Admin\Service\Reader\ExceptionReaderInterface;
 
 class LogviewerExceptionController extends FrameworkBundleAdminController
 {
-    /**
-     * @var GridFactory
-     */
-    private $exceptionEntryGridFactory;
-
-    /**
-     * @var ExceptionReaderInterface
-     */
-    private $exceptionReader;
-
-    /**
-     * @var string
-     */
-    private $currentEnvironment;
-
     public function __construct(
-        GridFactory $exceptionEntryGridFactory,
-        ExceptionReaderInterface $exceptionReader,
-        string $currentEnvironment
+        private GridFactory $exceptionEntryGridFactory,
+        private ExceptionReaderInterface $exceptionReader,
+        private readonly string $currentEnvironment,
     ) {
-        $this->exceptionEntryGridFactory = $exceptionEntryGridFactory;
-        $this->exceptionReader = $exceptionReader;
-        $this->currentEnvironment = $currentEnvironment;
     }
     
     /**

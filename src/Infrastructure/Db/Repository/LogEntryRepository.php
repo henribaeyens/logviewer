@@ -10,15 +10,11 @@ namespace PrestaShop\Module\Logviewer\Infrastructure\Db\Repository;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Query\QueryBuilder;
+use PrestaShop\Module\Logviewer\Domain\Entity\LogEntry;
 use PrestaShop\Module\Logviewer\Domain\Repository\LogEntryRepositoryInterface;
 
-class LogEntryRepository implements LogEntryRepositoryInterface
+final class LogEntryRepository implements LogEntryRepositoryInterface
 {
-    /**
-     * @var Connection the Database connection
-     */
-    private $connection;
-
     /**
      * @var string Table name
      */
@@ -29,11 +25,10 @@ class LogEntryRepository implements LogEntryRepositoryInterface
      * @param string $databasePrefix
      */
     public function __construct(
-        Connection $connection,
-        $databasePrefix,
+        private Connection $connection,
+        string $databasePrefix,
     ) {
-        $this->connection = $connection;
-        $this->table = $databasePrefix . 'logviewer_log';
+        $this->table = $databasePrefix . LogEntry::TABLE;
     }
 
     public function findLogContexts(): array

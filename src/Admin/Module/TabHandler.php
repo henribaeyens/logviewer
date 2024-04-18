@@ -17,20 +17,10 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 final class TabHandler
 {
-    /**
-     * @var TranslatorInterface
-     */
-    protected $translator;
-
-    /**
-     * @var TabRepository
-     */
-    protected $tabRepository;
-    
-    public function __construct(TabRepository $tabRepository, TranslatorInterface $translator)
-    {
-        $this->tabRepository = $tabRepository;
-        $this->translator = $translator;
+    public function __construct(
+        private TabRepository $tabRepository,
+        private TranslatorInterface $translator,
+    ) {
     }
 
     public function install(): bool

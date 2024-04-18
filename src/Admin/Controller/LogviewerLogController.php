@@ -8,7 +8,6 @@
 
 namespace PrestaShop\Module\Logviewer\Admin\Controller;
 
-use Configuration;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use PrestaShop\PrestaShop\Core\Grid\GridFactory;
@@ -18,39 +17,20 @@ use PrestaShopBundle\Security\Annotation\AdminSecurity;
 use PrestaShop\Module\Logviewer\Admin\Search\Filters\LogEntryFilters;
 use PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController;
 use PrestaShop\Module\Logviewer\Admin\Service\Reader\LogReaderInterface;
-use PrestaShop\Module\Logviewer\Domain\Repository\LogEntryRepositoryInterface;
 use PrestaShop\Module\Logviewer\Admin\Grid\Definition\LogEntryGridDefinitionFactory;
 
 class LogviewerLogController extends FrameworkBundleAdminController
 {
-    /**
-     * @var GridFactory
-     */
-    private $logEntryGridFactory;
-
-    /**
-     * @var LogReaderInterface
-     */
-    private $logReader;
-
-    /**
-     * @var string
-     */
-    private $currentEnvironment;
-
     /**
      * @param GridFactory $logEntryGridFactory
      * @param LogReaderInterface $logReader
      * @param string $currentEnvironment
      */
     public function __construct(
-        GridFactory $logEntryGridFactory,
-        LogReaderInterface $logReader,
-        string $currentEnvironment
+        private GridFactory $logEntryGridFactory,
+        private LogReaderInterface $logReader,
+        private readonly string $currentEnvironment,
     ) {
-        $this->logEntryGridFactory = $logEntryGridFactory;
-        $this->logReader = $logReader;
-        $this->currentEnvironment = $currentEnvironment;
     }
     
     /**

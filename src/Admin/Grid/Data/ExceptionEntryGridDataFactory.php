@@ -13,20 +13,14 @@ use PrestaShop\PrestaShop\Core\Grid\Record\RecordCollection;
 use PrestaShop\PrestaShop\Core\Grid\Search\SearchCriteriaInterface;
 use PrestaShop\PrestaShop\Core\Grid\Data\Factory\GridDataFactoryInterface;
 
-class ExceptionEntryGridDataFactory implements GridDataFactoryInterface
+final class ExceptionEntryGridDataFactory implements GridDataFactoryInterface
 {
-    /**
-     * @var GridDataFactoryInterface
-     */
-    protected $exceptionEntryDataFactory;
-
     /**
      * @param GridDataFactoryInterface $exceptionEntryDataFactory
      */
     public function __construct(
-        GridDataFactoryInterface $exceptionEntryDataFactory
+        private GridDataFactoryInterface $exceptionEntryDataFactory,
     ) {
-        $this->exceptionEntryDataFactory = $exceptionEntryDataFactory;
     }
 
     /**

@@ -14,22 +14,6 @@ class LogEntry extends ObjectModel
 {
     public CONST TABLE = 'logviewer_log';
 
-    public CONST LEVELS = [
-        'INFO' => 'INFO',
-        'DEBUG' => 'DEBUG',
-        'WARNING' => 'WARNING',
-        'CRITICAL' => 'CRITICAL',
-    ];
-
-    public CONST CONTEXTS = [
-        'app' => 'app',
-        'console' => 'console',
-        'doctrine' => 'doctrine',
-        'php' => 'php',
-        'request' => 'request',
-        'security' => 'security',
-    ];
-
     public $id;
 
     /** @var int entry ID */

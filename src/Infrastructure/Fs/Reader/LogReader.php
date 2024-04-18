@@ -19,11 +19,6 @@ use PrestaShop\Module\Logviewer\Infrastructure\Db\Operation\DeleteOutdatedEntrie
 final class LogReader extends AbstractReader implements LogReaderInterface
 {
     /**
-     * @var string
-     */
-    private $currentEnvironment;
-
-    /**
      * @var SplFileObject
      */
     private $fileObject = null;
@@ -38,11 +33,10 @@ final class LogReader extends AbstractReader implements LogReaderInterface
         string $logsDir,
         BulkInsert $bulkInsert,
         DeleteOutdatedEntries $deleteOutdatedEntries,
-        string $currentEnvironment
+        private readonly string $currentEnvironment
     ) {
         parent::__construct($logsDir, $bulkInsert, $deleteOutdatedEntries);
         $this->bulkInsert->setDefinition(LogEntry::class);
-        $this->currentEnvironment = $currentEnvironment;
     }
 
     public function read(): bool|string
