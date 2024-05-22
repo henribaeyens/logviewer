@@ -6,9 +6,9 @@
  * @license   MIT License
  */
 
-namespace PrestaShop\Module\Logviewer\Admin\Service\Reader;
+namespace PrestaShop\Module\Logviewer\Domain\Service\Reader;
 
 interface ExceptionReaderInterface
 {
-    public function read(): void;
+    public function process(): void;
 }

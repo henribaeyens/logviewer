@@ -22,16 +22,15 @@
         margin-right: 0;
     }
 
+    .alert {
+        margin-top: .5rem;
+        max-width: 47.65rem
+    }
+
     .form-group > {
         .card-header {
             background-color: white;
             margin-bottom: 2rem;
-        }
-
-        .alert {
-            :not(.alert-unavailable) {
-                max-width: 47.65rem
-            }
         }
 
         .help-box {
@@ -50,6 +49,8 @@
 
 }
 
-#configuration_form_Logviewer_History_Days {
+#configuration_form_Logviewer_History_Days,
+#configuration_form_Logviewer_Tail_Lines,
+#configuration_form_Logviewer_Exception_History_Days {
     max-width: 5rem;
 }

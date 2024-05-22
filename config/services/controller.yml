@@ -8,6 +8,9 @@ services:
     arguments:
         - '@prestashop.module.logviewer.repository.log_entry_repository_interface'
         - '@prestashop.module.logviewer.repository.exception_entry_repository_interface'
+        - '@prestashop.module.logviewer.reader.log_reader_interface'
+        - '@prestashop.module.logviewer.reader.factory.reading_strategy_interface'
+        - '@prestashop.module.logviewer.reader.exception_reader_interface'
         - '%kernel.environment%'
 
   PrestaShop\Module\Logviewer\Admin\Controller\LogviewerLogController:
@@ -15,6 +18,7 @@ services:
     arguments:
         - '@prestashop.module.logviewer.grid.log_entry_factory'
         - '@prestashop.module.logviewer.reader.log_reader_interface'
+        - '@prestashop.module.logviewer.reader.factory.reading_strategy_interface'
         - '%kernel.environment%'
 
   PrestaShop\Module\Logviewer\Admin\Controller\LogviewerExceptionController:

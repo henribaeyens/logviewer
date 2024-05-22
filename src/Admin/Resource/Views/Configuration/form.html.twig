@@ -18,31 +18,56 @@
         </h3>
         <div class="card-body">
           <div class="form-wrapper">
-            {{ form_errors(configurationForm) }}
 
             <fieldset class="form-group">
               <label class="form-control-label card-header">
-                {{ 'General settings'|trans({}, 'Modules.Logviewer.Admin') }}
+                {{ 'Logs Settings'|trans({}, 'Modules.Logviewer.Admin') }}
               </label>
               <div class="form-group row type-text">
-                <label for="configuration_form_Logviewer_History_Days" class="form-control-label ">
+                <label for="configuration_form_Logviewer_Strategy" class="form-control-label">
                   <span class="text-danger">*</span>
-                  {{ configurationForm.Logviewer_History_Days.vars.label  }}
+                  {{ configurationForm.Logviewer_Strategy.vars.label  }}
                 </label>
                 <div class="col-sm">
                   <div class="input-group">
-                    {{ form_widget(configurationForm.Logviewer_History_Days) }}
-                    <div class="input-group-append">
-                      <div class="input-group-text">{{ 'days'|trans({}, 'Modules.Logviewer.Admin') }}</div>
-                    </div>
+                    {{ form_widget(configurationForm.Logviewer_Strategy) }}
                   </div>
                 </div>
               </div>
-            </fieldset>
-            <fieldset class="form-group">
-              <label class="form-control-label card-header">
-                {{ 'Logs preferences'|trans({}, 'Modules.Logviewer.Admin') }}
-              </label>
+              <div class="strategy" id="strategy_history">
+                <div class="form-group row type-text">
+                  <label for="configuration_form_Logviewer_History_Days" class="form-control-label ">
+                    <span class="text-danger">*</span>
+                    {{ configurationForm.Logviewer_History_Days.vars.label  }}
+                  </label>
+                  <div class="col-sm">
+                    <div class="input-group">
+                      {{ form_widget(configurationForm.Logviewer_History_Days) }}
+                      <div class="input-group-append">
+                        <div class="input-group-text">{{ 'days'|trans({}, 'Modules.Logviewer.Admin') }}</div>
+                      </div>
+                    </div>
+                    {{ ps.form_error_with_popover(configurationForm.Logviewer_History_Days) }}
+                  </div>
+                </div>
+              </div>
+              <div class="strategy" id="strategy_tail">
+                <div class="form-group row type-text">
+                  <label for="configuration_form_Logviewer_Tail_Lines" class="form-control-label ">
+                    <span class="text-danger">*</span>
+                    {{ configurationForm.Logviewer_Tail_Lines.vars.label  }}
+                  </label>
+                  <div class="col-sm">
+                    <div class="input-group">
+                      {{ form_widget(configurationForm.Logviewer_Tail_Lines) }}
+                      <div class="input-group-append">
+                        <div class="input-group-text">{{ 'lines'|trans({}, 'Modules.Logviewer.Admin') }}</div>
+                      </div>
+                    </div>
+                    {{ ps.form_error_with_popover(configurationForm.Logviewer_Tail_Lines) }}
+                  </div>
+                </div>
+              </div>
               {{ ps.form_group_row(configurationForm.Logviewer_Log_Contexts, {}, {
                 'label': configurationForm.Logviewer_Log_Contexts.vars.label
               }) }}
@@ -50,6 +75,28 @@
                 'label': configurationForm.Logviewer_Log_Levels.vars.label
               }) }}
               </fieldset>
+
+              <fieldset class="form-group">
+                <label class="form-control-label card-header">
+                  {{ 'Exceptions Settings'|trans({}, 'Modules.Logviewer.Admin') }}
+                </label>
+                <div class="form-group row type-text">
+                  <label for="configuration_form_Logviewer_Exception_History_Days" class="form-control-label ">
+                    <span class="text-danger">*</span>
+                    {{ configurationForm.Logviewer_Exception_History_Days.vars.label  }}
+                  </label>
+                  <div class="col-sm">
+                    <div class="input-group">
+                      {{ form_widget(configurationForm.Logviewer_Exception_History_Days) }}
+                      <div class="input-group-append">
+                        <div class="input-group-text">{{ 'days'|trans({}, 'Modules.Logviewer.Admin') }}</div>
+                      </div>
+                    </div>
+                    {{ ps.form_error_with_popover(configurationForm.Logviewer_Exception_History_Days) }}
+                  </div>
+                </div>
+              </fieldset>
+
           </div>
         </div>
         <div class="card-footer">

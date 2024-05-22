@@ -22,6 +22,8 @@ abstract class AbstractDbOperation
         $this->definition = ObjectModel::getDefinition(new $entity());
     }
 
-    abstract public function execute(array $data): bool;
-
+    protected function checkEntity(array $definition)
+    {
+        return in_array($definition['table'], ['logviewer_log', 'logviewer_exception']);
+    }
 }

@@ -16,7 +16,6 @@ use PrestaShop\PrestaShop\Core\Grid\Column\ColumnCollection;
 use PrestaShop\PrestaShop\Core\Grid\Filter\FilterCollection;
 use PrestaShop\PrestaShop\Core\Grid\Action\GridActionCollection;
 use PrestaShop\Module\Logviewer\Admin\Grid\Column\LogLevelColumn;
-use PrestaShop\PrestaShop\Core\Grid\Action\Type\SimpleGridAction;
 use PrestaShop\PrestaShop\Core\Grid\Action\Type\SubmitGridAction;
 use PrestaShop\Module\Logviewer\Admin\Form\Type\LogLevelChoiceType;
 use PrestaShop\PrestaShop\Core\Grid\Column\Type\Common\ActionColumn;
@@ -55,7 +54,7 @@ final class LogEntryGridDefinitionFactory extends AbstractGridDefinitionFactory
                     ->setName($this->trans('Date', [], 'Modules.Logviewer.Admin'))
                     ->setOptions([
                         'field' => 'date',
-                        'sortable' => false,
+                        'sortable' => true,
                     ]
                 )
             )

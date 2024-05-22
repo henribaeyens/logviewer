@@ -16,24 +16,3 @@
  * @copyright Since 2007 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
  */
-
-const $ = window.$;
-
-$(() => {
-  new window.prestashop.component.ChoiceTable('#configuration_form_Logviewer_Log_Contexts');
-  new window.prestashop.component.ChoiceTable('#configuration_form_Logviewer_Log_Levels');
-
-
-  const strategySelector = $('#configuration_form_Logviewer_Strategy');
-
-  let strategy = strategySelector.val();
-  $('.strategy').hide();
-  $('#strategy_' + strategy).show();
-
-  strategySelector.on('change', () => {
-    strategy = strategySelector.val();
-    $('.strategy').hide();
-    $('#strategy_' + strategy).show();
-  });
-
-});

@@ -10,18 +10,17 @@ namespace PrestaShop\Module\Logviewer\Infrastructure\Db\Operation;
 
 use Db;
 
-class DeleteOutdatedEntries extends AbstractDbOperation
+class DeleteAllEntries extends AbstractDbOperation
 {
-    public function execute(array $dates): bool
+    public function execute(): bool
     {
         if ($this->checkEntity($this->definition)) {
             $dbInstance = Db::getInstance();
 
             $sql = '
-                DELETE FROM `' . _DB_PREFIX_ . $this->definition['table'] . '`
-                WHERE DATE(`date`) NOT IN ("' . implode('", "', $dates) . '");
+                TRUNCATE `' . _DB_PREFIX_ . $this->definition['table'] . '`
             ';
-
+    
             return $dbInstance->execute($sql);
         }
         return false;
