@@ -53,7 +53,7 @@ class Logviewer extends Module
     {
         $this->name = 'logviewer';
         $this->tab = 'other';
-        $this->version = '1.2.0';
+        $this->version = '1.3.0';
         $this->author = 'Henri Baeyens';
         $this->need_instance = 0;
 
@@ -73,10 +73,13 @@ class Logviewer extends Module
      */
     public function install(): bool
     {
+        Configuration::updateValue('Logviewer_Strategy', 'history');
         Configuration::updateValue('Logviewer_History_Days', 5);
         Configuration::updateValue('Logviewer_Last_Line_Read_Dev', 0);
         Configuration::updateValue('Logviewer_Last_Line_Read_Prod', 0);
         Configuration::updateValue('Logviewer_Last_Date_Read', 0);
+        Configuration::updateValue('Logviewer_Tail_Lines', 100);
+        Configuration::updateValue('Logviewer_Exception_History_Days', 5);
 
         $finder = new ContainerFinder(Context::getContext());
         $sfContainer = $finder->getContainer();
@@ -92,12 +95,15 @@ class Logviewer extends Module
      */
     public function uninstall(): bool
     {
+        Configuration::deleteByName('Logviewer_Strategy');
+        Configuration::deleteByName('Logviewer_Tail_Lines');
         Configuration::deleteByName('Logviewer_History_Days');
         Configuration::deleteByName('Logviewer_Last_Line_Read_Dev');
         Configuration::deleteByName('Logviewer_Last_Line_Read_Prod');
         Configuration::deleteByName('Logviewer_Last_Date_Read');
         Configuration::deleteByName('Logviewer_Log_Contexts');
         Configuration::deleteByName('Logviewer_Log_Levels');
+        Configuration::deleteByName('Logviewer_Exception_History_Days');
 
         $finder = new ContainerFinder(Context::getContext());
         $sfContainer = $finder->getContainer();

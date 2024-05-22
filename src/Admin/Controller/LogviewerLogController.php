@@ -8,6 +8,7 @@
 
 namespace PrestaShop\Module\Logviewer\Admin\Controller;
 
+use Configuration;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use PrestaShop\PrestaShop\Core\Grid\GridFactory;
@@ -16,7 +17,8 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use PrestaShopBundle\Security\Annotation\AdminSecurity;
 use PrestaShop\Module\Logviewer\Admin\Search\Filters\LogEntryFilters;
 use PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController;
-use PrestaShop\Module\Logviewer\Admin\Service\Reader\LogReaderInterface;
+use PrestaShop\Module\Logviewer\Domain\Service\Reader\LogReaderInterface;
+use PrestaShop\Module\Logviewer\Domain\Factory\ReadingStrategyFactoryInterface;
 use PrestaShop\Module\Logviewer\Admin\Grid\Definition\LogEntryGridDefinitionFactory;
 
 class LogviewerLogController extends FrameworkBundleAdminController
@@ -24,11 +26,13 @@ class LogviewerLogController extends FrameworkBundleAdminController
     /**
      * @param GridFactory $logEntryGridFactory
      * @param LogReaderInterface $logReader
+     * @param ReadingStrategyFactoryInterface $readingStrategyFactory
      * @param string $currentEnvironment
      */
     public function __construct(
         private GridFactory $logEntryGridFactory,
         private LogReaderInterface $logReader,
+        private ReadingStrategyFactoryInterface $readingStrategyFactory,
         private readonly string $currentEnvironment,
     ) {
     }
@@ -93,11 +97,14 @@ class LogviewerLogController extends FrameworkBundleAdminController
      */
     public function refreshAction(Request $request): RedirectResponse
     {
-        $outcome = $this->logReader->read();
+        set_time_limit(600);
+        ini_set('memory_limit', '512M');
+
+        $readingStrategy = $this->readingStrategyFactory->create(Configuration::get('Logviewer_Strategy'), $this->currentEnvironment);
+        $outcome = $this->logReader->process($readingStrategy);
         if (true !== $outcome) {
             $this->addFlash('error', $outcome);
         }
-        
 
         return $this->redirectToRoute('logviewer_logs');
     }

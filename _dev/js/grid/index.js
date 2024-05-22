@@ -24,9 +24,18 @@ $(() => {
     logsGrid.addExtension(new window.prestashop.component.GridExtensions.SubmitGridActionExtension());
     logsGrid.addExtension(new window.prestashop.component.GridExtensions.FiltersSubmitButtonEnablerExtension());
     logsGrid.addExtension(new window.prestashop.component.GridExtensions.FiltersResetExtension());
+    logsGrid.addExtension(new window.prestashop.component.GridExtensions.SortingExtension());
 
     const exceptionsGrid = new window.prestashop.component.Grid('logviewer_grid_exception_entries');
     exceptionsGrid.addExtension(new window.prestashop.component.GridExtensions.SubmitGridActionExtension());
     exceptionsGrid.addExtension(new window.prestashop.component.GridExtensions.FiltersSubmitButtonEnablerExtension());
     exceptionsGrid.addExtension(new window.prestashop.component.GridExtensions.FiltersResetExtension());
+
+    let exceptionsTable = $('#logviewer_grid_exception_entries_grid_table');
+    if (exceptionsTable) {
+        let items = exceptionsTable.find('td.html-type');
+        items.each((i, el) => {
+            $(el).html($(el).text());
+        });
+    }
 });

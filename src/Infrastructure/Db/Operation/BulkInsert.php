@@ -6,7 +6,7 @@
  * @license   MIT License
  */
 
- namespace PrestaShop\Module\Logviewer\Infrastructure\Db\Operation;
+namespace PrestaShop\Module\Logviewer\Infrastructure\Db\Operation;
 
 use Db;
 

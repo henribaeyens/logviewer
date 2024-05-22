@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use PrestaShopBundle\Security\Annotation\AdminSecurity;
 use PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController;
 use PrestaShop\Module\Logviewer\Admin\Search\Filters\ExceptionEntryFilters;
-use PrestaShop\Module\Logviewer\Admin\Service\Reader\ExceptionReaderInterface;
+use PrestaShop\Module\Logviewer\Domain\Service\Reader\ExceptionReaderInterface;
 
 class LogviewerExceptionController extends FrameworkBundleAdminController
 {
@@ -84,7 +84,7 @@ class LogviewerExceptionController extends FrameworkBundleAdminController
      */
     public function refreshAction(Request $request): RedirectResponse
     {
-        $this->exceptionReader->read();
+        $this->exceptionReader->process();
 
         return $this->redirectToRoute('logviewer_exceptions');
     }
